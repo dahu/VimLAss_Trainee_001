@@ -6,10 +6,10 @@ _Establish a working VimL Dev environment_
 
 1. Install https://github.com/vim-scripts/runVimTests.git and follow the
    install instructions detailed at
-   [](http://www.vim.org/scripts/script.php?script_id=2565)
+   http://www.vim.org/scripts/script.php?script_id=2565
 
 2. Install version 0.3 of
-   [](http://www.vim.org/scripts/script.php?script_id=2213)). NOTE: the 0.4
+   http://www.vim.org/scripts/script.php?script_id=2213. NOTE: the 0.4
    version is currently incompatible with runVimTests.
 
 3. Install the runVimTests binaries to a directory that's in your $PATH. I have ~/.vim/bin in my $PATH, so I would run:
