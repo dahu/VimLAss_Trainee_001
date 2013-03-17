@@ -23,3 +23,7 @@ _Establish a working VimL Dev environment_
 You should see:
 
   9 files with 19 tests; 0 skipped, 19 run: 19 OK, 0 failures, 0 errors.
+
+5. Run the test suite for this plugin:
+
+  runVimTests.sh test/test_001.vim
