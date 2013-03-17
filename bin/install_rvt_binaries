@@ -1,0 +1,43 @@
+#!/bin/sh
+# install_rvt_binaries - symlinks runVimTests binaries to a bin_path of your choice
+# Barry Arthur 2013-03-17
+
+exe=`basename $0`
+exe_path=`dirname $0`
+
+usage() {
+  echo "\nusage: $exe bin_path\n"
+  echo "Installs symlinks to runVimTests binaries in the bin_path of your choice."
+  echo "Ensure that bin_path exists in your \$PATH environment variable.\n"
+}
+
+target_bin_dir="$1"
+
+if [ "$target_bin_dir" = "-h" -o "$target_bin_dir" = "--help" ]; then
+  usage
+  exit 0
+fi
+
+if [ -z "$target_bin_dir" -o ! -d "$target_bin_dir" ]; then
+  echo "\n  Error: Invalid bin_path: $target_bin_dir"
+  usage
+  exit 1
+fi
+
+# extend $PATH for vim-rtp-locate
+PATH="$exe_path":$PATH
+
+for exe in runVimMsgFilter.vim runVimTests.cmd runVimTests.sh ; do
+  exe_loc=`vim-rtp-locate "bin/$exe"`
+  if [ -z "$exe_loc" ]; then
+    echo "Error: unable to locate $exe in your &runtimepath. Ensure that you have installed runVimTests properly."
+    exit 1
+  fi
+  if [ ! -x "$exe_loc" ]; then
+    chmod +x "$exe_loc"
+  fi
+  if [ ! -f "$target_bin_dir/$exe" ]; then
+    echo "Creating symlink to $exe_loc in $target_bin_dir"
+    ln -s "$exe_loc" "$target_bin_dir"
+  fi
+done
